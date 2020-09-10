@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <table dir="ltr" width="500" border="1"
+			summary="purpose/structure for speech output">
+	 <thead>
+        <tr>
+            <th>userId</th>
+            <th>userName</th>
+            <th>userCity</th>
+            <th>userAge</th>
+            <th>userStartDate</th>
+        </tr>
+        </thead>
+        <tfoot>
+        <tr>
+            <th>userId</th>
+            <th>userName</th>
+            <th>userCity</th>
+            <th>userAge</th>
+            <th>userStartDate</th>
+        </tr>
+        </tfoot>
+        <tbody>
+        {% for row in results.items %}
+            <tr>
+                <td>{{ row['userId'] }}</td>
+                <td>{{ row['userName'] }}</td>
+                <td>{{ row['userCity'] }}</td>
+                <td>{{ row['userAge'] }}</td>
+                <td>{{ row['userStartDate'] }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+</table>
+{% for page in results.iter_pages() %}
+    {% if page %}
+        <a href="{{ url_for('home',page=page,per_page=results.per_page) }}">{{ page }}</a>
+    {% else %}
+    ...
+    {% endif %}
+{% endfor %}
+</body>
+</html>
